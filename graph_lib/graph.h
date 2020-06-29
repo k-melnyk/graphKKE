@@ -25,6 +25,10 @@ namespace GraphLib {
             return nodeIndeces;
         }
 
+        TYPE_EDGE_WEIGHT GetWeight() {
+            return m_weight;
+        }
+
     private:
         size_t m_indexOfNode1;
         size_t m_indexOfNode2;
@@ -52,12 +56,21 @@ namespace GraphLib {
         TYPE_EDGE_WEIGHT GetEdgeWeight(size_t indexOfNode1, size_t indexOfNode2) const;
         std::vector<std::pair<size_t, size_t>> GetVectorOfEdges() const;
 
+//        TYPE_EDGE_WEIGHT GetInvalidValue() {
+//            return invalidValue.typeEdgeWeight;
+//        }
+
     protected:
         size_t numberOfNodes;
         std::unordered_map<size_t, std::set<size_t>> adjList;
 
         std::vector<TYPE_NODE_LABELS> nodeLabels;
         std::vector<Edge<TYPE_EDGE_WEIGHT>> edgeWeights;
+
+//        union {
+//            size_t i = 0;
+//            TYPE_EDGE_WEIGHT typeEdgeWeight;
+//        } invalidValue;
     };
 
     template <typename TYPE_NODE_LABELS, typename TYPE_EDGE_WEIGHT>
@@ -146,7 +159,7 @@ namespace GraphLib {
         std::vector<bool> flagsSourceNodes(numberOfNodes, false);
 
         for (size_t i = 0; i < numberOfNodes; ++i) {
-            std::set<size_t>& currentAdjList = GetNodeNeighbors(i);
+            const std::set<size_t>& currentAdjList = GetNodeNeighbors(i);
 
             if (!currentAdjList.empty()) {
                 for (auto& node : currentAdjList) {
@@ -182,20 +195,21 @@ namespace GraphLib {
 
     template <typename TYPE_NODE_LABELS, typename TYPE_EDGE_WEIGHT>
     TYPE_EDGE_WEIGHT Graph<TYPE_NODE_LABELS, TYPE_EDGE_WEIGHT>::GetEdgeWeight(size_t indexOfNode1, size_t indexOfNode2) const {
-        std::pair<size_t, size_t> pairNodes = {indexOfNode1, indexOfNode2};
-
         for (size_t i = 0; i < edgeWeights.size(); ++i) {
             Edge<TYPE_EDGE_WEIGHT> currentEdge = edgeWeights[i];
             std::pair<size_t, size_t> pairOfNodes = currentEdge.GetNodeIndeces();
 
             if (pairOfNodes.first == indexOfNode1 && pairOfNodes.second == indexOfNode2) {
-                return currentEdge.m_weight;
+                return currentEdge.GetWeight();
+                break;
             }
 
             if (pairOfNodes.first == indexOfNode2 && pairOfNodes.second == indexOfNode1) {
-                return currentEdge.m_weight;
+                return currentEdge.GetWeight();
+                break;
             }
         }
+        return 0;
     }
 }
 
