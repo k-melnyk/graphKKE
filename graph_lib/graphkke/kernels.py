@@ -1,8 +1,8 @@
 import numpy as np
 from sklearn.metrics.pairwise import euclidean_distances
 
-import utils as utils
-import graph_lib as gl
+from .utils import normalize_gram_matrix
+import graph_lib.graph as gr
 
 
 class Kernel(object):
@@ -11,7 +11,7 @@ class Kernel(object):
         super(Kernel, self).__init__()
 
     def compute_gram_matrices(self, graphs, tau=1):
-        if not any(isinstance(graph, gl.Graph) for graph in graphs):
+        if not any(isinstance(graph, gr.Graph) for graph in graphs):
             raise TypeError('The list of Graph should be passed')
 
         gram_xx, gram_xy = self._compute_gram(graphs, tau)
@@ -61,8 +61,8 @@ class WlKernel(Kernel):
 
         print('Computing {kernel} kernel...'.format(kernel=self.__class__.__name__))
 
-        gram = gl.wl_subtree_kernel(graphs, self.n_iterations)
-        k_normalized = utils.normalize_gram_matrix(gram)
+        gram = gr.wl_subtree_kernel(graphs, self.n_iterations)
+        k_normalized = normalize_gram_matrix(gram)
         gram_xx = k_normalized[:n_graphs - tau, :n_graphs - tau]
         gram_xy = k_normalized[:n_graphs - tau, tau:n_graphs]
 

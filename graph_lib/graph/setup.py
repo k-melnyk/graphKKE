@@ -20,5 +20,4 @@ setup(name='graph_lib',
       author_email='kateryna.melnyk96@gmail.com',
       cmdclass={'build_py': build_py},
       ext_modules=[GraphLib_c_ext],
-      py_modules=['GraphLib_c'],
-      scripts=['graph_lib.py'])
+      py_modules=['graph_lib'])
