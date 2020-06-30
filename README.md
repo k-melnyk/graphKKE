@@ -6,6 +6,7 @@ The library contains the fast implementation of Weisfeiler-Lehman graph kernel [
 * **graphlib**: It consists of the most recent dynamic graph embedding approaches, with each files representing a single embedding method. We also have some
 
 ## Install
+* The Python interface is created from a C++ source code that is wrapped with SWIG (http://www.swig.org).
 * The package uses setuptools, which is a common way of installing python modules. To install: 
   - To install in your home directory, use:
     ```
