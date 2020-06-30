@@ -1,10 +1,8 @@
-import tqdm
 import numpy as np
-import pandas as pd
 import itertools
 
 import seaborn as sns
-import matplotlib.pyplot as plt
+import matplotlib as plt
 
 
 class GraphSimulation(object):
@@ -80,7 +78,7 @@ class GraphSimulation(object):
         images = []
         idx_to_plot = self.choose_random_idx()
 
-        for t in tqdm.trange(self.n_graphs):
+        for t in range(self.n_graphs):
             edges_to_remove, nodes_to_remove, adj_matrix = self.edges_to_remove_prob(sde_traj, t, in_state)
 
             curr_matrix = np.array(adj_matrix)

@@ -2,10 +2,11 @@ from setuptools import setup, Extension
 from setuptools.command.build_py import build_py as _build_py
 
 
-class build_py(_build_py):
+class BuildPy(_build_py):
     def run(self):
         self.run_command("build_ext")
         return super().run()
+
 
 GraphLib_c_ext = Extension(name='_GraphLib_c',
                            swig_opts=['-c++'],
@@ -18,6 +19,17 @@ setup(name='graph_lib',
       url='https://github.com/KaterynaMelnyk/graphKKE.git',
       author='Kateryna Melnyk',
       author_email='kateryna.melnyk96@gmail.com',
-      cmdclass={'build_py': build_py},
+      cmdclass={'build_py': BuildPy},
       ext_modules=[GraphLib_c_ext],
-      packages=['graph_lib'])
+      packages=['graph_lib'],
+      install_requires=['numpy',
+                        'itertools',
+                        'seaborn',
+                        'matplotlib',
+                        'scipy',
+                        'sklearn',
+                        'pandas',
+                        'mpl_toolkits'],
+      classifiers=['Development Status :: 3 - Alpha',
+                   'License :: MIT License',
+                   'Programming Language :: Python :: 3.7'])

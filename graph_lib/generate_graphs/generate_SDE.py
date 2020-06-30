@@ -1,5 +1,4 @@
 import copy
-import tqdm
 import numpy as np
 
 
@@ -93,7 +92,7 @@ class SDE:
 
         """
         initial_val = initial_val.transpose()
-        return [self.one_traj(initial_val[i, :]) for i in tqdm.trange(dim_traj)]
+        return [self.one_traj(initial_val[i, :]) for i in range(dim_traj)]
 
 
 class DoubleWell1D(SDE):
