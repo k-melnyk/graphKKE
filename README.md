@@ -6,15 +6,14 @@ The library contains the fast implementation of Weisfeiler-Lehman graph kernel [
 * **graphlib**: It consists of the most recent dynamic graph embedding approaches, with each files representing a single embedding method. We also have some
 
 ## Install
-* For setting of rest of the methods, the package uses setuptools, which is a common way of installing python modules. 
+* The package uses setuptools, which is a common way of installing python modules. To install: 
   - To install in your home directory, use:
-    ```bash
-      export PYTHONPATH="/<...>/site-packages/:$PYTHONPATH"
-      python setup.py install --user
-     ```
-  - To install for all users on Unix/Linux:
-    ```bash 
-       sudo python setup.py install
+    ```
+    $ git clone https://github.com/KaterynaMelnyk/GraphLib.git
+    $ cd GraphLib
+    
+    $ python setup.py build
+    $ python setup.py install
     ```
 ## Usage Example
 
