@@ -2,7 +2,7 @@ import numpy as np
 from sklearn.metrics.pairwise import euclidean_distances
 
 from .utils import normalize_gram_matrix
-import graph_lib.graph as gr
+import graphkke.graph.graph as gr
 
 
 class Kernel(object):

@@ -2,10 +2,10 @@ import os
 import numpy as np
 import scipy as sp
 
-from .utils import sort_eigvec
+from .utils import sort_eigvec, save_metrics
 
 
-def graph_kke(graphs, kernel_type, tau=1, epsilon=1e-2, operator='K', outdir=None):
+def graphkke(graphs, kernel_type, tau=1, epsilon=1e-2, operator='K', outdir=None):
     """
     Main function for graphKKE method.
 
@@ -33,7 +33,7 @@ def graph_kke(graphs, kernel_type, tau=1, epsilon=1e-2, operator='K', outdir=Non
 
     A = sp.linalg.pinv(gram_xx + epsilon * sp.eye(n_graphs), rcond=1e-15) @ gram_xy
 
-    d, v = utils.sort_eigvec(A)
+    d, v = sort_eigvec(A)
 
     if operator == 'K':
         v = gram_xx @ v
@@ -46,6 +46,6 @@ def graph_kke(graphs, kernel_type, tau=1, epsilon=1e-2, operator='K', outdir=Non
         np.save(os.path.join(outdir, 'eigenvectors.npy'), v)
         np.save(os.path.join(outdir, 'gramm.npy'), gram_xx)
 
-        utils.save_metrics(d, v, outdir)
+        save_metrics(d, v, outdir)
     else:
         return d, v, gram_xx
