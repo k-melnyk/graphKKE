@@ -1,6 +1,5 @@
-## A library for the analysis of graph-structured and tree-structured data. 
+## GraphKKE: Graph Kernel Koopman Embedding. 
 
-The library contains the fast implementation of Weisfeiler-Lehman graph kernel [0].
 
 ## Repository Structure
 * **graphkke/graphkke**: consists of the main function for the grapphKKE method;
