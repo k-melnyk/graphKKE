@@ -1,5 +1,5 @@
 import numpy as np
-import GraphLib_c as gl_c
+import graphkke.graph.GraphLib_c as gl_c
 
 
 class Graph(object):
@@ -35,5 +35,5 @@ class Graph(object):
 
 
 def wl_subtree_kernel(graphs, n_iterations):
-    kernel = gl_c.WLSubtreeKernelii_thread(graphs, n_iterations)
+    kernel = gl_c.WLSubtreeKernelii(graphs, n_iterations)
     return np.array(kernel)

@@ -6,7 +6,6 @@ import pandas as pd
 import scipy as sp
 import itertools
 
-import networkx as nx
 import matplotlib.pyplot as plt
 from mpl_toolkits.axes_grid1 import make_axes_locatable
 import seaborn as sns
@@ -222,7 +221,7 @@ def create_graphs_from_matrix(df):
     data_dict = {}
 
     for i in range(n_graphs):
-        adj_matrix = np.zeros((n_nodes, n_nodes), dtype=int)
+        adj_matrix = np.zeros((n_nodes, n_nodes))
 
         if isinstance(df, pd.DataFrame):
             name = df.iloc[i, :].name
