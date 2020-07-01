@@ -11,9 +11,6 @@ class Kernel(object):
         super(Kernel, self).__init__()
 
     def compute_gram_matrices(self, graphs, tau=1):
-        if not any(isinstance(graph, gr.Graph) for graph in graphs):
-            raise TypeError('The list of Graph should be passed')
-
         gram_xx, gram_xy = self._compute_gram(graphs, tau)
 
         return gram_xx, gram_xy
@@ -28,7 +25,14 @@ class GaussianKernel(Kernel):
         super(GaussianKernel, self).__init__(sigma)
 
     def _compute_gram(self, graphs, tau=1):
-        x, y = self._transform_data(graphs, tau)
+        if any(isinstance(graph, gr.Graph) for graph in graphs):
+            x, y = self._transform_data(graphs, tau)
+        else:
+            x = graphs[:-1]
+            y = graphs[1:]
+
+            x = x.reshape(len(x), -1)
+            y = y.reshape(len(y), -1)
 
         gram_xx = self.__compute_gaussian(x, x)
         gram_xy = self.__compute_gaussian(x, y)
@@ -57,6 +61,8 @@ class WlKernel(Kernel):
         super(WlKernel, self).__init__(number_of_iterations)
 
     def _compute_gram(self, graphs, tau=1):
+        if not any(isinstance(graph, gr.Graph) for graph in graphs):
+            raise TypeError('The list of Graph should be passed')
         n_graphs = len(graphs)
 
         print('Computing {kernel} kernel...'.format(kernel=self.__class__.__name__))

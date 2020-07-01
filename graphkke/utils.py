@@ -221,7 +221,7 @@ def create_graphs_from_matrix(df):
     data_dict = {}
 
     for i in range(n_graphs):
-        adj_matrix = np.zeros((n_nodes, n_nodes), dtype=int)
+        adj_matrix = np.zeros((n_nodes, n_nodes))
 
         if isinstance(df, pd.DataFrame):
             name = df.iloc[i, :].name
