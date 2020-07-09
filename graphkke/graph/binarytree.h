@@ -14,8 +14,8 @@ namespace Trees {
     class BinaryTree {
         public:
             ~BinaryTree();
-            Node<TYPE>* GetRoot() const {
-                return root;
+            Node<TYPE>* Getm_root() const {
+                return m_root;
             }
             void InsertNode(TYPE newValueOfNode);
             Node<TYPE>* FindNode(TYPE newValueOfNode);
@@ -23,21 +23,21 @@ namespace Trees {
             void PrintTree();
 
         private:
-            Node<TYPE> *root = nullptr;
+            Node<TYPE> *m_root = nullptr;
     };
 
     template <typename TYPE>
     BinaryTree<TYPE>::~BinaryTree() {
-        delete root;
+        delete m_root;
     }
 
     template <typename TYPE>
     void BinaryTree<TYPE>::InsertNode(TYPE newValueOfNode) {
-        Node<TYPE> *currentNode = root;
+        Node<TYPE> *currentNode = m_root;
 
-        if (!root) {
-            root = new Node<TYPE>();
-            root->data = newValueOfNode;
+        if (!m_root) {
+            m_root = new Node<TYPE>();
+            m_root->data = newValueOfNode;
             return;
         }
 
@@ -67,7 +67,7 @@ namespace Trees {
 
     template <typename TYPE>
     Node<TYPE>* BinaryTree<TYPE>::FindNode(TYPE newValueOfNode) {
-        Node<TYPE> *currentNode = root;
+        Node<TYPE> *currentNode = m_root;
 
         if (!currentNode) {
             std::cout<< "There are no vertices in the tree to be found." <<std::endl;
@@ -92,7 +92,7 @@ namespace Trees {
 
     template <typename TYPE>
     void BinaryTree<TYPE>::DeleteNode(TYPE newValueOfNode) {
-        Node<TYPE> *currentNode = root;
+        Node<TYPE> *currentNode = m_root;
         Node<TYPE> *parentNode = nullptr;
 
         if (!currentNode) {

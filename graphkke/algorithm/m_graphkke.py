@@ -4,7 +4,6 @@ import scipy as sp
 
 from .utils import sort_eigvec, save_metrics
 
-
 def graphkke(graphs, kernel_type, tau=1, epsilon=1e-2, operator='K', outdir=None):
     """
     Main function for graphKKE method.

@@ -28,8 +28,8 @@ class GaussianKernel(Kernel):
         if any(isinstance(graph, gr.Graph) for graph in graphs):
             x, y = self._transform_data(graphs, tau)
         else:
-            x = graphs[:-1]
-            y = graphs[1:]
+            x = graphs[:-tau]
+            y = graphs[tau:]
 
             x = x.reshape(len(x), -1)
             y = y.reshape(len(y), -1)
@@ -48,9 +48,11 @@ class GaussianKernel(Kernel):
 
         all_adj_matrix = np.array([graph.get_adj_matrix() for graph in graphs])
 
-        all_adj_matrix = all_adj_matrix.reshape(len(all_adj_matrix), -1)
         x = all_adj_matrix[:-tau]
         y = all_adj_matrix[tau:]
+
+        x = x.reshape(len(x), -1)
+        y = y.reshape(len(y), -1)
 
         return x, y
 

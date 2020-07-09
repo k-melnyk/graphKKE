@@ -45,7 +45,6 @@ namespace GraphLib {
 
     void ComputeInnerProduct(const std::vector<std::vector<int>>& countLabels, size_t numberOfRowsBegin,  size_t numberOfRowsEnd, std::vector<std::vector<int>>& kernelMatrix) {
         for (size_t i = numberOfRowsBegin; i < numberOfRowsEnd; ++i) {
-            std::cout << "Computing kernel for vector: " << i <<std::endl;
 
             for (size_t j = 0; j < countLabels.size(); ++j) {
                 const int dotProduct = std::inner_product(countLabels[i].begin(), countLabels[i].end(), countLabels[j].begin(), 0);
@@ -87,7 +86,6 @@ namespace GraphLib {
         size_t iter = 0;
         while (iter != numberOfIteration) {
             for (size_t indexOfGraph = 0; indexOfGraph < numberOfGraphs; ++indexOfGraph) {
-                std::cout << "Preprocess labels: " << indexOfGraph << std::endl;
                 std::vector<std::string> newNodeLabels;
 
                 size_t currentNumberOfNodes = vectorOfGraph[indexOfGraph].GetNumberOfNodes();
@@ -142,7 +140,6 @@ namespace GraphLib {
                 }
             }
         }
-        std::cout << "Count labels..." << std::endl;
 
         std::vector<std::vector<int>> countLabels;
         countLabels.resize(numberOfGraphs, std::vector<int>());
@@ -154,7 +151,6 @@ namespace GraphLib {
 
         if (step != 0) {
             for (size_t i = 0; i < numberOfThreads; ++i) {
-                std::cout << "Threading...." << std::endl;
 
                 if (i != numberOfThreads - 1) {
                     std::thread currentThread(CountLabelsInGraph, std::ref(graphLabelsInt), std::ref(hashLabels), step * i , step * (i + 1), std::ref(countLabels));
@@ -180,7 +176,6 @@ namespace GraphLib {
 
         if (step != 0) {
             for (size_t i = 0; i < numberOfThreads; ++i) {
-                std::cout << "Threading inner product...." << std::endl;
 
                 if (i != numberOfThreads - 1) {
                     std::thread currentThread(ComputeInnerProduct, std::ref(countLabels), step * i, step * (i + 1), std::ref(kernelMatrix));

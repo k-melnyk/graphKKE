@@ -18648,6 +18648,31 @@ fail:
 
 SWIGINTERN PyObject *_wrap_new_Graphii__SWIG_1(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
+  GraphLib::Graph< int,int > *arg1 = 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  PyObject * obj0 = 0 ;
+  GraphLib::Graph< int,int > *result = 0 ;
+  
+  if (!PyArg_ParseTuple(args,(char *)"O:new_Graphii",&obj0)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1, SWIGTYPE_p_GraphLib__GraphT_int_int_t,  0  | 0);
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "new_Graphii" "', argument " "1"" of type '" "GraphLib::Graph< int,int > const &""'"); 
+  }
+  if (!argp1) {
+    SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "new_Graphii" "', argument " "1"" of type '" "GraphLib::Graph< int,int > const &""'"); 
+  }
+  arg1 = reinterpret_cast< GraphLib::Graph< int,int > * >(argp1);
+  result = (GraphLib::Graph< int,int > *)new GraphLib::Graph< int,int >((GraphLib::Graph< int,int > const &)*arg1);
+  resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_GraphLib__GraphT_int_int_t, SWIG_POINTER_NEW |  0 );
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_new_Graphii__SWIG_2(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
   size_t arg1 ;
   size_t val1 ;
   int ecode1 = 0 ;
@@ -18668,7 +18693,7 @@ fail:
 }
 
 
-SWIGINTERN PyObject *_wrap_new_Graphii__SWIG_2(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+SWIGINTERN PyObject *_wrap_new_Graphii__SWIG_3(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
   std::vector< std::vector< size_t,std::allocator< size_t > >,std::allocator< std::vector< size_t,std::allocator< size_t > > > > arg1 ;
   PyObject * obj0 = 0 ;
@@ -18692,7 +18717,7 @@ fail:
 }
 
 
-SWIGINTERN PyObject *_wrap_new_Graphii__SWIG_3(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+SWIGINTERN PyObject *_wrap_new_Graphii__SWIG_4(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
   std::vector< std::pair< size_t,size_t >,std::allocator< std::pair< size_t,size_t > > > arg1 ;
   size_t arg2 ;
@@ -18742,12 +18767,20 @@ SWIGINTERN PyObject *_wrap_new_Graphii(PyObject *self, PyObject *args) {
   }
   if (argc == 1) {
     int _v;
+    int res = SWIG_ConvertPtr(argv[0], 0, SWIGTYPE_p_GraphLib__GraphT_int_int_t, 0);
+    _v = SWIG_CheckState(res);
+    if (_v) {
+      return _wrap_new_Graphii__SWIG_1(self, args);
+    }
+  }
+  if (argc == 1) {
+    int _v;
     {
       int res = SWIG_AsVal_size_t(argv[0], NULL);
       _v = SWIG_CheckState(res);
     }
     if (_v) {
-      return _wrap_new_Graphii__SWIG_1(self, args);
+      return _wrap_new_Graphii__SWIG_2(self, args);
     }
   }
   if (argc == 1) {
@@ -18755,7 +18788,7 @@ SWIGINTERN PyObject *_wrap_new_Graphii(PyObject *self, PyObject *args) {
     int res = swig::asptr(argv[0], (std::vector< std::vector< size_t,std::allocator< size_t > >,std::allocator< std::vector< size_t,std::allocator< size_t > > > >**)(0));
     _v = SWIG_CheckState(res);
     if (_v) {
-      return _wrap_new_Graphii__SWIG_2(self, args);
+      return _wrap_new_Graphii__SWIG_3(self, args);
     }
   }
   if (argc == 2) {
@@ -18768,7 +18801,7 @@ SWIGINTERN PyObject *_wrap_new_Graphii(PyObject *self, PyObject *args) {
         _v = SWIG_CheckState(res);
       }
       if (_v) {
-        return _wrap_new_Graphii__SWIG_3(self, args);
+        return _wrap_new_Graphii__SWIG_4(self, args);
       }
     }
   }
@@ -18777,6 +18810,7 @@ fail:
   SWIG_SetErrorMsg(PyExc_NotImplementedError,"Wrong number or type of arguments for overloaded function 'new_Graphii'.\n"
     "  Possible C/C++ prototypes are:\n"
     "    GraphLib::Graph< int,int >::Graph()\n"
+    "    GraphLib::Graph< int,int >::Graph(GraphLib::Graph< int,int > const &)\n"
     "    GraphLib::Graph< int,int >::Graph(size_t)\n"
     "    GraphLib::Graph< int,int >::Graph(std::vector< std::vector< size_t,std::allocator< size_t > >,std::allocator< std::vector< size_t,std::allocator< size_t > > > > const)\n"
     "    GraphLib::Graph< int,int >::Graph(std::vector< std::pair< size_t,size_t >,std::allocator< std::pair< size_t,size_t > > > const,size_t)\n");
@@ -19098,6 +19132,31 @@ fail:
 
 SWIGINTERN PyObject *_wrap_new_Graphstst__SWIG_1(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
+  GraphLib::Graph< size_t,size_t > *arg1 = 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  PyObject * obj0 = 0 ;
+  GraphLib::Graph< size_t,size_t > *result = 0 ;
+  
+  if (!PyArg_ParseTuple(args,(char *)"O:new_Graphstst",&obj0)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1, SWIGTYPE_p_GraphLib__GraphT_size_t_size_t_t,  0  | 0);
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "new_Graphstst" "', argument " "1"" of type '" "GraphLib::Graph< size_t,size_t > const &""'"); 
+  }
+  if (!argp1) {
+    SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "new_Graphstst" "', argument " "1"" of type '" "GraphLib::Graph< size_t,size_t > const &""'"); 
+  }
+  arg1 = reinterpret_cast< GraphLib::Graph< size_t,size_t > * >(argp1);
+  result = (GraphLib::Graph< size_t,size_t > *)new GraphLib::Graph< size_t,size_t >((GraphLib::Graph< size_t,size_t > const &)*arg1);
+  resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_GraphLib__GraphT_size_t_size_t_t, SWIG_POINTER_NEW |  0 );
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_new_Graphstst__SWIG_2(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
   size_t arg1 ;
   size_t val1 ;
   int ecode1 = 0 ;
@@ -19118,7 +19177,7 @@ fail:
 }
 
 
-SWIGINTERN PyObject *_wrap_new_Graphstst__SWIG_2(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+SWIGINTERN PyObject *_wrap_new_Graphstst__SWIG_3(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
   std::vector< std::vector< size_t,std::allocator< size_t > >,std::allocator< std::vector< size_t,std::allocator< size_t > > > > arg1 ;
   PyObject * obj0 = 0 ;
@@ -19142,7 +19201,7 @@ fail:
 }
 
 
-SWIGINTERN PyObject *_wrap_new_Graphstst__SWIG_3(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+SWIGINTERN PyObject *_wrap_new_Graphstst__SWIG_4(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
   std::vector< std::pair< size_t,size_t >,std::allocator< std::pair< size_t,size_t > > > arg1 ;
   size_t arg2 ;
@@ -19192,12 +19251,20 @@ SWIGINTERN PyObject *_wrap_new_Graphstst(PyObject *self, PyObject *args) {
   }
   if (argc == 1) {
     int _v;
+    int res = SWIG_ConvertPtr(argv[0], 0, SWIGTYPE_p_GraphLib__GraphT_size_t_size_t_t, 0);
+    _v = SWIG_CheckState(res);
+    if (_v) {
+      return _wrap_new_Graphstst__SWIG_1(self, args);
+    }
+  }
+  if (argc == 1) {
+    int _v;
     {
       int res = SWIG_AsVal_size_t(argv[0], NULL);
       _v = SWIG_CheckState(res);
     }
     if (_v) {
-      return _wrap_new_Graphstst__SWIG_1(self, args);
+      return _wrap_new_Graphstst__SWIG_2(self, args);
     }
   }
   if (argc == 1) {
@@ -19205,7 +19272,7 @@ SWIGINTERN PyObject *_wrap_new_Graphstst(PyObject *self, PyObject *args) {
     int res = swig::asptr(argv[0], (std::vector< std::vector< size_t,std::allocator< size_t > >,std::allocator< std::vector< size_t,std::allocator< size_t > > > >**)(0));
     _v = SWIG_CheckState(res);
     if (_v) {
-      return _wrap_new_Graphstst__SWIG_2(self, args);
+      return _wrap_new_Graphstst__SWIG_3(self, args);
     }
   }
   if (argc == 2) {
@@ -19218,7 +19285,7 @@ SWIGINTERN PyObject *_wrap_new_Graphstst(PyObject *self, PyObject *args) {
         _v = SWIG_CheckState(res);
       }
       if (_v) {
-        return _wrap_new_Graphstst__SWIG_3(self, args);
+        return _wrap_new_Graphstst__SWIG_4(self, args);
       }
     }
   }
@@ -19227,6 +19294,7 @@ fail:
   SWIG_SetErrorMsg(PyExc_NotImplementedError,"Wrong number or type of arguments for overloaded function 'new_Graphstst'.\n"
     "  Possible C/C++ prototypes are:\n"
     "    GraphLib::Graph< size_t,size_t >::Graph()\n"
+    "    GraphLib::Graph< size_t,size_t >::Graph(GraphLib::Graph< size_t,size_t > const &)\n"
     "    GraphLib::Graph< size_t,size_t >::Graph(size_t)\n"
     "    GraphLib::Graph< size_t,size_t >::Graph(std::vector< std::vector< size_t,std::allocator< size_t > >,std::allocator< std::vector< size_t,std::allocator< size_t > > > > const)\n"
     "    GraphLib::Graph< size_t,size_t >::Graph(std::vector< std::pair< size_t,size_t >,std::allocator< std::pair< size_t,size_t > > > const,size_t)\n");
@@ -19554,6 +19622,31 @@ fail:
 
 SWIGINTERN PyObject *_wrap_new_Graphis__SWIG_1(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
+  GraphLib::Graph< int,std::string > *arg1 = 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  PyObject * obj0 = 0 ;
+  GraphLib::Graph< int,std::string > *result = 0 ;
+  
+  if (!PyArg_ParseTuple(args,(char *)"O:new_Graphis",&obj0)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1, SWIGTYPE_p_GraphLib__GraphT_int_std__string_t,  0  | 0);
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "new_Graphis" "', argument " "1"" of type '" "GraphLib::Graph< int,std::string > const &""'"); 
+  }
+  if (!argp1) {
+    SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "new_Graphis" "', argument " "1"" of type '" "GraphLib::Graph< int,std::string > const &""'"); 
+  }
+  arg1 = reinterpret_cast< GraphLib::Graph< int,std::string > * >(argp1);
+  result = (GraphLib::Graph< int,std::string > *)new GraphLib::Graph< int,std::string >((GraphLib::Graph< int,std::string > const &)*arg1);
+  resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_GraphLib__GraphT_int_std__string_t, SWIG_POINTER_NEW |  0 );
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_new_Graphis__SWIG_2(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
   size_t arg1 ;
   size_t val1 ;
   int ecode1 = 0 ;
@@ -19574,7 +19667,7 @@ fail:
 }
 
 
-SWIGINTERN PyObject *_wrap_new_Graphis__SWIG_2(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+SWIGINTERN PyObject *_wrap_new_Graphis__SWIG_3(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
   std::vector< std::vector< size_t,std::allocator< size_t > >,std::allocator< std::vector< size_t,std::allocator< size_t > > > > arg1 ;
   PyObject * obj0 = 0 ;
@@ -19598,7 +19691,7 @@ fail:
 }
 
 
-SWIGINTERN PyObject *_wrap_new_Graphis__SWIG_3(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+SWIGINTERN PyObject *_wrap_new_Graphis__SWIG_4(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
   std::vector< std::pair< size_t,size_t >,std::allocator< std::pair< size_t,size_t > > > arg1 ;
   size_t arg2 ;
@@ -19648,12 +19741,20 @@ SWIGINTERN PyObject *_wrap_new_Graphis(PyObject *self, PyObject *args) {
   }
   if (argc == 1) {
     int _v;
+    int res = SWIG_ConvertPtr(argv[0], 0, SWIGTYPE_p_GraphLib__GraphT_int_std__string_t, 0);
+    _v = SWIG_CheckState(res);
+    if (_v) {
+      return _wrap_new_Graphis__SWIG_1(self, args);
+    }
+  }
+  if (argc == 1) {
+    int _v;
     {
       int res = SWIG_AsVal_size_t(argv[0], NULL);
       _v = SWIG_CheckState(res);
     }
     if (_v) {
-      return _wrap_new_Graphis__SWIG_1(self, args);
+      return _wrap_new_Graphis__SWIG_2(self, args);
     }
   }
   if (argc == 1) {
@@ -19661,7 +19762,7 @@ SWIGINTERN PyObject *_wrap_new_Graphis(PyObject *self, PyObject *args) {
     int res = swig::asptr(argv[0], (std::vector< std::vector< size_t,std::allocator< size_t > >,std::allocator< std::vector< size_t,std::allocator< size_t > > > >**)(0));
     _v = SWIG_CheckState(res);
     if (_v) {
-      return _wrap_new_Graphis__SWIG_2(self, args);
+      return _wrap_new_Graphis__SWIG_3(self, args);
     }
   }
   if (argc == 2) {
@@ -19674,7 +19775,7 @@ SWIGINTERN PyObject *_wrap_new_Graphis(PyObject *self, PyObject *args) {
         _v = SWIG_CheckState(res);
       }
       if (_v) {
-        return _wrap_new_Graphis__SWIG_3(self, args);
+        return _wrap_new_Graphis__SWIG_4(self, args);
       }
     }
   }
@@ -19683,6 +19784,7 @@ fail:
   SWIG_SetErrorMsg(PyExc_NotImplementedError,"Wrong number or type of arguments for overloaded function 'new_Graphis'.\n"
     "  Possible C/C++ prototypes are:\n"
     "    GraphLib::Graph< int,std::string >::Graph()\n"
+    "    GraphLib::Graph< int,std::string >::Graph(GraphLib::Graph< int,std::string > const &)\n"
     "    GraphLib::Graph< int,std::string >::Graph(size_t)\n"
     "    GraphLib::Graph< int,std::string >::Graph(std::vector< std::vector< size_t,std::allocator< size_t > >,std::allocator< std::vector< size_t,std::allocator< size_t > > > > const)\n"
     "    GraphLib::Graph< int,std::string >::Graph(std::vector< std::pair< size_t,size_t >,std::allocator< std::pair< size_t,size_t > > > const,size_t)\n");
