@@ -41,8 +41,13 @@ std::vector<TYPE_EDGE_WEIGHT> DijkstraAlgo(GraphLib::Graph<TYPE_NODE_LABELS, TYP
         const std::vector<size_t> &currentAdjList = graph.GetNodeNeighbors(indexCurrentNode);
 
         for (size_t i = 0; i < currentAdjList.size(); ++i) {
-            if (!checkedNodes[currentAdjList[i]] && distances[indexCurrentNode] + graph.GetEdgeWeight(indexCurrentNode, currentAdjList[i]) < distances[currentAdjList[i]]) {
-                distances[currentAdjList[i]] = distances[indexCurrentNode] + graph.GetEdgeWeight(indexCurrentNode, currentAdjList[i]);
+            TYPE_EDGE_WEIGHT invalidValue = graph.GetInvalidValue();
+            TYPE_EDGE_WEIGHT weightEdge = graph.GetEdgeWeight(indexCurrentNode, currentAdjList[i]);
+            if (weightEdge != invalidValue) {
+
+                if (!checkedNodes[currentAdjList[i]] && distances[indexCurrentNode] + weightEdge < distances[currentAdjList[i]]) {
+                    distances[currentAdjList[i]] = distances[indexCurrentNode] + weightEdge;
+                }
             }
         }
         ++i;

@@ -22,8 +22,8 @@ namespace Trees {
     public:
         ~RedBlackTree();
         void InsertNode(TYPE newValueOfNode);
-        NodeRB<TYPE>* GetRoot() const {
-            return root;
+        NodeRB<TYPE>* Getm_root() const {
+            return m_root;
         }
     private:
         void RotateRightRight(NodeRB<TYPE> *currentNode);
@@ -31,12 +31,12 @@ namespace Trees {
         void RotateLeft(NodeRB<TYPE> *currentNode);
         void RotateRight(NodeRB<TYPE> *currentNode);
 
-        NodeRB<TYPE> *root = nullptr;
+        NodeRB<TYPE> *m_root = nullptr;
     };
 
     template <typename TYPE>
     RedBlackTree<TYPE>::~RedBlackTree() {
-        delete root;
+        delete m_root;
     }
 
     template <typename TYPE>
@@ -57,7 +57,7 @@ namespace Trees {
             currentParent->parent = currentGrandParent->parent;
         }
         else {
-            root = currentParent;
+            m_root = currentParent;
             currentParent->parent = nullptr;
         }
         currentGrandParent->parent = currentNode->parent;
@@ -88,7 +88,7 @@ namespace Trees {
             currentParent->parent = currentGrandParent->parent;
         }
         else {
-            root = currentParent;
+            m_root = currentParent;
             currentParent->parent = nullptr;
         }
         currentGrandParent->parent = currentNode->parent;
@@ -144,14 +144,14 @@ namespace Trees {
 
     template <typename TYPE>
     void RedBlackTree<TYPE>::InsertNode(TYPE newValueOfNode) {
-        NodeRB<TYPE> *currentNode = root;
+        NodeRB<TYPE> *currentNode = m_root;
         NodeRB<TYPE> *parent_node = currentNode;
 
-        if (!root) {
-            root = new NodeRB<TYPE>();
-            root->parent = nullptr;
-            root->data = newValueOfNode;
-            root->color = NodeColor::black;
+        if (!m_root) {
+            m_root = new NodeRB<TYPE>();
+            m_root->parent = nullptr;
+            m_root->data = newValueOfNode;
+            m_root->color = NodeColor::black;
         }
 
         while (currentNode) {
@@ -188,7 +188,7 @@ namespace Trees {
         if (currentNode) {
             NodeRB<TYPE> *uncleNode = nullptr;
 
-            while (currentNode != root && currentNode->parent->color != NodeColor::black) {
+            while (currentNode != m_root && currentNode->parent->color != NodeColor::black) {
                 if (currentNode->parent->parent->left == currentNode->parent) {
                     uncleNode = currentNode->parent->parent->right;
                 }
@@ -201,8 +201,8 @@ namespace Trees {
                     uncleNode->color = NodeColor::black;
                     currentNode->parent->parent->color = NodeColor::red;
 
-                    if (currentNode->parent->parent == root) {
-                        currentNode = root;
+                    if (currentNode->parent->parent == m_root) {
+                        currentNode = m_root;
                         currentNode->color = NodeColor::black;
                     }
                     else {
@@ -239,7 +239,7 @@ namespace Trees {
                     }
                 }
 
-                if (currentNode == root) {
+                if (currentNode == m_root) {
                     break;
                 }
             }
