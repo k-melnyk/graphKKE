@@ -78,7 +78,10 @@ namespace GraphLib {
     Graph<TYPE_NODE_LABELS, TYPE_EDGE_WEIGHT>::Graph(size_t numOfNodes) : m_numberOfNodes(numOfNodes) {}
 
     template <typename TYPE_NODE_LABELS, typename TYPE_EDGE_WEIGHT>
-    Graph<TYPE_NODE_LABELS, TYPE_EDGE_WEIGHT>::Graph(const Graph& graph) : m_numberOfNodes(graph.m_numberOfNodes) {}
+    Graph<TYPE_NODE_LABELS, TYPE_EDGE_WEIGHT>::Graph(const Graph& graph) : m_numberOfNodes(graph.m_numberOfNodes),
+                                                                           m_adjList(graph.m_adjList),
+                                                                           m_nodeLabels(graph.m_nodeLabels),
+                                                                           m_edgeWeights(graph.m_edgeWeights) {}
 
     template <typename TYPE_NODE_LABELS, typename TYPE_EDGE_WEIGHT>
     Graph<TYPE_NODE_LABELS, TYPE_EDGE_WEIGHT>::Graph(const std::vector<std::vector<size_t>> adjMatrix) : m_numberOfNodes(adjMatrix.size()) {
