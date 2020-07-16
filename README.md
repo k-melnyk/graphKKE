@@ -20,7 +20,7 @@
     $ python setup.py install
     ```
 ## Examples
-* In order to run the graphKKE method, you need first convert your array of adjacency matrices ```adj_matrix``` or adjacency lists ```adj_list``` into graph data type, where ```node_labels``` is a list of node labels for each time-point.
+* You need first convert your array of adjacency matrices ```adj_matrix``` or adjacency lists ```adj_list``` into graph data type, where ```node_labels``` is a list of node labels for each time-point.
     ```python
     from graphkke.algorithm import m_graphkke
     import graphkke.algorithm.kernels as kernels
