@@ -20,30 +20,9 @@
     $ python setup.py install
     ```
 ## Examples
-* In order to run the graphKKE method, you need first convert your adjacency matrices or adjacency lists into graph data type.
-    - If you have a node labels vector for each graph ```node_labels```, then run:
-    ```
-    graphs = []
-    adj_matrix[np.where(adj_matrix != 0)] = 1
-    for ind, graph in enumerate(adj_matrix):
-        graph = gl.Graph(graph)
-        graph.add_node_labels(node_labels[ind])
-
-        graphs.append(graph)
-    ```
- - If you have adjacency matrix ```adj_matrix``` and do not have the vector of node labels:
-    ```
-    num_nodes = adj_matrix.shape[-1]
-    node_labels = list(range(num_nodes))
-
-    graphs = []
-    adj_matrix[np.where(adj_matrix != 0)] = 1
-    for graph in tqdm.tqdm(adj_matrix):
-        graph = gl.Graph(graph)
-        graph.add_node_labels(node_labels)
-
-        graphs.append(graph)
-    ```
+* In order to run the graphKKE method, you need first convert your adjacency matrices ```adj_matrix``` or adjacency lists ```adj_list``` into graph data type, where ```node_labels``` is a list of node labels.
+      graph = gl.Graph(adj_matrix)
+      graph.add_node_labels(node_labels)
 
 ## References
    [0]  Shervashidze  N.  et  al.  “Weisfeiler-Lehman  GraphKernels.” In: Journal of Machine Learning Research 12 (2011), pp. 2539–2561.
