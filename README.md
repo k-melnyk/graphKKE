@@ -13,8 +13,8 @@
 * The package uses setuptools, which is a common way of installing python modules. To install: 
   - To install in your home directory, use:
     ```
-    $ git clone https://github.com/KaterynaMelnyk/GraphLib.git
-    $ cd GraphLib
+    $ git clone https://github.com/KaterynaMelnyk/GraphKKE.git
+    $ cd GraphKKE
     
     $ python setup.py build
     $ python setup.py install
