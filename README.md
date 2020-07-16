@@ -22,6 +22,10 @@
 ## Examples
 * In order to run the graphKKE method, you need first convert your array of adjacency matrices ```adj_matrix``` or adjacency lists ```adj_list``` into graph data type, where ```node_labels``` is a list of node labels for each time-point.
     ```python
+    from graphkke.algorithm import m_graphkke
+    import graphkke.algorithm.kernels as kernels
+    import graphkke.graph.graph as gl
+    
     graphs = []
     adj_matrix[np.where(adj_matrix != 0)] = 1
     
@@ -31,7 +35,28 @@
 
         graphs.append(graph)
     ```
-  Or adjacency list:
+  Or adjacency lists:
+    ```python
+    graphs = []
+    adj_matrix[np.where(adj_matrix != 0)] = 1
+    
+    for ind, graph in enumerate(adj_list):
+        graph = gl.Graph(graph, num_nodes)
+        graph.add_node_labels(node_labels[ind])
+
+        graphs.append(graph)
+    ```
+* For running graphKKE:
+```python
+# Hyperparameters of graphKKE
+epsilon = 0.5
+operator = 'K'
+num_iterations = 5
+k = kernels.WlKernel(num_iterations)
+
+# Run graphKKE method
+m_graphkke.graphkke(graphs, k, tau=1, epsilon=epsilon, outdir=outdir)
+```
 
 ## References
    [0]  Shervashidze  N.  et  al.  “Weisfeiler-Lehman  GraphKernels.” In: Journal of Machine Learning Research 12 (2011), pp. 2539–2561.
