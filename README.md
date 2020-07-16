@@ -5,7 +5,7 @@
 * **graphkke/algorithm**: consists of the main function for the grapphKKE method;
 * **graphkke/graph**: consists of the class Graph and of C++ implemenatation of WL kernel with multithreading. The Python interface is created from a C++ source code that is wrapped with SWIG (http://www.swig.org);
 * **graphkke/generate_graphs**: consists of functions and classes for generating the benchmark graphs with metastable behavior;
-* **examples**: consists of experiments with the benchmark data and real-world datasets;
+* **examples**: consists of experiments with the benchmark data and real-world datasets, and also a script for generating benchmark data;
 * **data**: contains OTU tables and constructed adjacency matrices. Microbiome data is coming from [1] and [2].
 
 
