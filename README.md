@@ -47,16 +47,23 @@
         graphs.append(graph)
     ```
 * For running graphKKE:
-```python
-# Hyperparameters of graphKKE
-epsilon = 0.5
-operator = 'K'
-num_iterations = 5
-k = kernels.WlKernel(num_iterations)
+  ```python
+  # Hyperparameters of graphKKE
+  epsilon = 0.5
+  operator = 'K'
+  num_iterations = 5
+  k = kernels.WlKernel(num_iterations)
 
-# Run graphKKE method
-m_graphkke.graphkke(graphs, k, tau=1, epsilon=epsilon, outdir=outdir)
-```
+  # Run graphKKE method
+  m_graphkke.graphkke(graphs, k, tau=1, epsilon=epsilon, outdir=outdir)
+  ```
+
+* In order to run WL kernel: 
+  ```pyhton
+  import graphkke.graph.graph as gl
+  
+  kernel = gl.wl_subtree_kernel(graph, n_iterations)
+  ```
 
 ## References
    [0]  Shervashidze  N.  et  al.  “Weisfeiler-Lehman  GraphKernels.” In: Journal of Machine Learning Research 12 (2011), pp. 2539–2561.
