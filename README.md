@@ -21,7 +21,7 @@
     ```
 ## Examples
 * In order to run the graphKKE method, you need first convert your array of adjacency matrices ```adj_matrix``` or adjacency lists ```adj_list``` into graph data type, where ```node_labels``` is a list of node labels for each time-point.
-    ```
+    ```python
     graphs = []
     adj_matrix[np.where(adj_matrix != 0)] = 1
     
