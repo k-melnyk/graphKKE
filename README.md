@@ -21,7 +21,7 @@
     ```
 ## Examples
 * In order to run the graphKKE method, you need first convert your adjacency matrices or adjacency lists into graph data type.
- - If you have adjacency matrix ```adj_matrix``` and node labels vector for each graph - ```node_labels```:
+    - If you have a node labels vector for each graph ```node_labels```, then run:
     ```
     graphs = []
     adj_matrix[np.where(adj_matrix != 0)] = 1
@@ -38,9 +38,9 @@
 
     graphs = []
     adj_matrix[np.where(adj_matrix != 0)] = 1
-    for ind, graph in enumerate(adj_matrix):
+    for graph in tqdm.tqdm(adj_matrix):
         graph = gl.Graph(graph)
-        graph.add_node_labels(node_labels[ind])
+        graph.add_node_labels(node_labels)
 
         graphs.append(graph)
     ```
