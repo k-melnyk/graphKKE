@@ -2,10 +2,11 @@
 
 
 ## Repository Structure
-* **graphkke/graphkke**: consists of the main function for the grapphKKE method;
+* **graphkke/algorithm**: consists of the main function for the grapphKKE method;
 * **graphkke/graph**: consists of the class Graph and of C++ implemenatation of WL kernel with multithreading. The Python interface is created from a C++ source code that is wrapped with SWIG (http://www.swig.org);
 * **graphkke/generate_graphs**: consists of functions and classes for generating the benchmark graphs with metastable behavior;
-* **examples**: consists of experiments with the benchmakr data and real-world dataset.
+* **examples**: consists of experiments with the benchmark data and real-world datasets.
+* **data**: contains OTU tables and constructed adjacency matrices.
 
 
 ## Install
@@ -15,9 +16,34 @@
     $ git clone https://github.com/KaterynaMelnyk/GraphLib.git
     $ cd GraphLib
     
-    $ pip install .
+    $ python setup.py build
+    $ python setup.py install
     ```
 ## Examples
+* In order to run the graphKKE method, you need first convert your adjacency matrices or adjacency lists into graph data type.
+ - If you have adjacency matrix ```adj_matrix``` and node labels vector for each graph - ```node_labels```:
+    ```
+    graphs = []
+    adj_matrix[np.where(adj_matrix != 0)] = 1
+    for ind, graph in enumerate(adj_matrix):
+        graph = gl.Graph(graph)
+        graph.add_node_labels(node_labels[ind])
+
+        graphs.append(graph)
+    ```
+ - If you have adjacency matrix ```adj_matrix``` and do not have the vector of node labels:
+    ```
+    num_nodes = adj_matrix.shape[-1]
+    node_labels = list(range(num_nodes))
+
+    graphs = []
+    adj_matrix[np.where(adj_matrix != 0)] = 1
+    for ind, graph in enumerate(adj_matrix):
+        graph = gl.Graph(graph)
+        graph.add_node_labels(node_labels[ind])
+
+        graphs.append(graph)
+    ```
 
 ## References
    [0]  Shervashidze  N.  et  al.  “Weisfeiler-Lehman  GraphKernels.” In: Journal of Machine Learning Research 12 (2011), pp. 2539–2561.
