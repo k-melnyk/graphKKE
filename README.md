@@ -59,7 +59,7 @@
   ```
 
 * In order to run WL kernel: 
-  ```pyhton
+  ```python
   import graphkke.graph.graph as gl
   
   kernel = gl.wl_subtree_kernel(graph, n_iterations)
