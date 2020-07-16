@@ -5,8 +5,8 @@
 * **graphkke/algorithm**: consists of the main function for the grapphKKE method;
 * **graphkke/graph**: consists of the class Graph and of C++ implemenatation of WL kernel with multithreading. The Python interface is created from a C++ source code that is wrapped with SWIG (http://www.swig.org);
 * **graphkke/generate_graphs**: consists of functions and classes for generating the benchmark graphs with metastable behavior;
-* **examples**: consists of experiments with the benchmark data and real-world datasets.
-* **data**: contains OTU tables and constructed adjacency matrices.
+* **examples**: consists of experiments with the benchmark data and real-world datasets;
+* **data**: contains OTU tables and constructed adjacency matrices. Microbiome data is coming from [1] and [2].
 
 
 ## Install
@@ -70,5 +70,30 @@ m_graphkke.graphkke(graphs, k, tau=1, epsilon=epsilon, outdir=outdir)
       pages={2539-2561}
     }
    ```
-
+   [1] Hsiao  A.  et  al.  “Members  of  the  human  gut  mi-crobiota involved in recovery from Vibrio choleraeinfection”. In:Nature515 (Jan. 2014), pp. 423–426.
+   ```
+   @article{CholeraInfOriginal,
+    author = {Hsiao A. and Shamsir Ahmed AM. and Subramanian S. and Griffin NW. and Drewry LL. and Petri WA. and Haque R. and Ahmed T. and Gordon JI.},
+    year = {2014},
+    month = {01},
+    title = {Members of the human gut microbiota involved in recovery from Vibrio cholerae infection},
+    volume = {515},
+    pages={423-426},
+    journal = {Nature},
+    doi = {10.1038/nature13738}
+    }
+   ```
+   [2]  Caporaso J. et al. “Moving pictures of the humanmicrobiome”.  In:Genome  biology12  (May  2011),R50.
+   ```
+   @article{MovingPicture,
+    author = {Caporaso J. and Lauber C. and Costello E. and Berg-Lyons D. and González A. and Stombaugh J. and Knights D and Gajer P. and Ravel J. and Fierer N. and Gordon J. and Knight R.},
+    year = {2011},
+    month = {05},
+    pages = {R50},
+    title = {Moving pictures of the human microbiome},
+    volume = {12},
+    journal = {Genome biology},
+    doi = {10.1186/gb-2011-12-5-r50}
+    }
+   ```
 
