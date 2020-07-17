@@ -14,7 +14,7 @@ namespace Trees {
     class BinaryTree {
         public:
             ~BinaryTree();
-            Node<TYPE>* Getm_root() const {
+            Node<TYPE>* GetRoot() const {
                 return m_root;
             }
             void InsertNode(TYPE newValueOfNode);

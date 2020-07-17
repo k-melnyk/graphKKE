@@ -5,6 +5,7 @@
 #include <vector>
 #include <unordered_map>
 #include <set>
+#include <stdio.h>
 
 #include "utils.h"
 
@@ -40,10 +41,14 @@ namespace GraphLib {
     class Graph {
     public:
         Graph() = default;
-        Graph(const Graph& graph);
-        Graph(size_t numOfNodes);
-        Graph(const std::vector<std::vector<size_t>> adjMatrix);
-        Graph(const std::vector<std::pair<size_t, size_t>> vectorOfEdges, size_t numberOfNodes);
+        Graph(const Graph& graph) noexcept;
+        Graph(Graph&& graphs) noexcept;
+        Graph(size_t numOfNodes) noexcept;
+        Graph(const std::vector<std::vector<size_t>> adjMatrix) noexcept;
+        Graph(const std::vector<std::pair<size_t, size_t>> vectorOfEdges, size_t numberOfNodes) noexcept;
+
+        Graph& operator=(Graph&& graph) noexcept;
+        Graph& operator=(const Graph& graph) noexcept;
 
         void AddEdge(size_t sourceNodeINdex, size_t destNodeIndex);
         void AddNodeLabels(const std::vector<TYPE_NODE_LABELS> vectorOfNodeLabels);
@@ -57,31 +62,57 @@ namespace GraphLib {
         TYPE_EDGE_WEIGHT GetEdgeWeight(size_t indexOfNode1, size_t indexOfNode2) const;
         std::vector<std::pair<size_t, size_t>> GetVectorOfEdges() const;
 
-//        TYPE_EDGE_WEIGHT GetInvalidValue() {
-//            return m_invalidValue.typeEdgeWeight;
-//        }
-
     protected:
         size_t m_numberOfNodes;
         std::unordered_map<size_t, std::set<size_t>> m_adjList;
 
         std::vector<TYPE_NODE_LABELS> m_nodeLabels;
         std::vector<Edge<TYPE_EDGE_WEIGHT>> m_edgeWeights;
-
-//        union {
-//            size_t i = 0;
-//            TYPE_EDGE_WEIGHT typeEdgeWeight;
-//        } m_invalidValue;
     };
 
     template <typename TYPE_NODE_LABELS, typename TYPE_EDGE_WEIGHT>
-    Graph<TYPE_NODE_LABELS, TYPE_EDGE_WEIGHT>::Graph(size_t numOfNodes) : m_numberOfNodes(numOfNodes) {}
+    Graph<TYPE_NODE_LABELS, TYPE_EDGE_WEIGHT>::Graph(size_t numOfNodes) noexcept : m_numberOfNodes(numOfNodes) {
+    }
 
     template <typename TYPE_NODE_LABELS, typename TYPE_EDGE_WEIGHT>
-    Graph<TYPE_NODE_LABELS, TYPE_EDGE_WEIGHT>::Graph(const Graph& graph) : m_numberOfNodes(graph.m_numberOfNodes) {}
+    Graph<TYPE_NODE_LABELS, TYPE_EDGE_WEIGHT>::Graph(const Graph& graph) noexcept : m_numberOfNodes(graph.m_numberOfNodes),
+                                                                           m_adjList(graph.m_adjList),
+                                                                           m_nodeLabels(graph.m_nodeLabels),
+                                                                           m_edgeWeights(graph.m_edgeWeights) {
+    }
 
     template <typename TYPE_NODE_LABELS, typename TYPE_EDGE_WEIGHT>
-    Graph<TYPE_NODE_LABELS, TYPE_EDGE_WEIGHT>::Graph(const std::vector<std::vector<size_t>> adjMatrix) : m_numberOfNodes(adjMatrix.size()) {
+    Graph<TYPE_NODE_LABELS, TYPE_EDGE_WEIGHT>::Graph(Graph&& graph) noexcept : m_numberOfNodes(graph.m_numberOfNodes),
+                                                                      m_adjList(graph.m_adjList),
+                                                                      m_nodeLabels(graph.m_nodeLabels),
+                                                                      m_edgeWeights(graph.m_edgeWeights) {
+    }
+
+    template <typename TYPE_NODE_LABELS, typename TYPE_EDGE_WEIGHT>
+    Graph<TYPE_NODE_LABELS, TYPE_EDGE_WEIGHT>& Graph<TYPE_NODE_LABELS, TYPE_EDGE_WEIGHT>::operator=(const Graph& graph) noexcept {
+        if (this == &graph) return *this;
+
+        m_numberOfNodes = graph.m_numberOfNodes;
+        m_adjList = graph.m_adjList;
+        m_nodeLabels = graph.m_nodeLabels;
+        m_edgeWeights = graph.m_edgeWeights;
+        return *this;
+    }
+
+    template <typename TYPE_NODE_LABELS, typename TYPE_EDGE_WEIGHT>
+    Graph<TYPE_NODE_LABELS, TYPE_EDGE_WEIGHT>& Graph<TYPE_NODE_LABELS, TYPE_EDGE_WEIGHT>::operator=(Graph&& graph) noexcept{
+        if (this == &graph) return *this;
+
+        m_numberOfNodes = graph.m_numberOfNodes;
+        m_adjList = graph.m_adjList;
+        m_nodeLabels = graph.m_nodeLabels;
+        m_edgeWeights = graph.m_edgeWeights;
+        return *this;
+    }
+
+
+    template <typename TYPE_NODE_LABELS, typename TYPE_EDGE_WEIGHT>
+    Graph<TYPE_NODE_LABELS, TYPE_EDGE_WEIGHT>::Graph(const std::vector<std::vector<size_t>> adjMatrix) noexcept : m_numberOfNodes(adjMatrix.size()) {
         for (size_t i = 0; i < adjMatrix.size(); ++i) {
             std::set<size_t> nodeNeighbors;
             for (size_t j = 0; j < adjMatrix.size(); ++j) {
@@ -94,7 +125,7 @@ namespace GraphLib {
     }
 
     template <typename TYPE_NODE_LABELS, typename TYPE_EDGE_WEIGHT>
-    Graph<TYPE_NODE_LABELS, TYPE_EDGE_WEIGHT>::Graph(const std::vector<std::pair<size_t, size_t>> vectorOfEdges, size_t numberOfNodes) : m_numberOfNodes(numberOfNodes) {
+    Graph<TYPE_NODE_LABELS, TYPE_EDGE_WEIGHT>::Graph(const std::vector<std::pair<size_t, size_t>> vectorOfEdges, size_t numberOfNodes) noexcept : m_numberOfNodes(numberOfNodes) {
         for (size_t i = 0; i < numberOfNodes; ++i) {
             m_adjList.emplace(i, std::set<size_t>());
         }

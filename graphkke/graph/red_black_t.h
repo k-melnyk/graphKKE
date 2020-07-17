@@ -22,7 +22,7 @@ namespace Trees {
     public:
         ~RedBlackTree();
         void InsertNode(TYPE newValueOfNode);
-        NodeRB<TYPE>* Getm_root() const {
+        NodeRB<TYPE>* GetRoot() const {
             return m_root;
         }
     private:
