@@ -2,7 +2,7 @@ import numpy as np
 import itertools
 
 import seaborn as sns
-import matplotlib as plt
+import matplotlib.pyplot as plt
 
 
 class GraphSimulation(object):
@@ -44,7 +44,7 @@ class GraphSimulation(object):
         """
         Generate uniform distributed points for node positions.
         """
-        points = [(np.random.uniform(-1.2, 1.2), np.random.uniform(-1.2, 1.2)) for _ in np.arange(self.n_nodes)]
+        points = [(np.random.uniform(-1.7, 1.7), np.random.uniform(-1.7, 1.7)) for _ in np.arange(self.n_nodes)]
 
         return np.array(points)
 
@@ -52,7 +52,7 @@ class GraphSimulation(object):
         return [np.random.choice(np.argwhere(self.graph_states == label).flatten(), size=num_points_in_each_class)
                 for label in np.unique(self.graph_states)]
 
-    def create_adj_matrix(self, sde_traj, in_state=None, if_plot=False):
+    def create_adj_matrix(self, sde_traj, out_state=None, if_plot=False):
         """
         Method for the generation of snapshots of time-dependent graph.
 
@@ -60,7 +60,7 @@ class GraphSimulation(object):
         ----------
         sde_traj: array, (n_graphs, 2)
             Trajectory of SDE.
-        in_state:
+        out_state:
             Probability to remove edges inside the circle.
         if_plot:
             If plot examples of graph snapshots.
@@ -79,22 +79,22 @@ class GraphSimulation(object):
         idx_to_plot = self.choose_random_idx()
 
         for t in range(self.n_graphs):
-            edges_to_remove, nodes_to_remove, adj_matrix = self.edges_to_remove_prob(sde_traj, t, in_state)
+            edges_to_remove, adj_matrix = self.edges_to_remove_prob(sde_traj, t, out_state)
 
             curr_matrix = np.array(adj_matrix)
-            np.fill_diagonal(curr_matrix[:, :], 0)
+            np.fill_diagonal(curr_matrix, 0)
             graphs.append(curr_matrix)
 
             if if_plot:
                 if t in np.hstack(idx_to_plot):
-                    images.append(self.plot_graph(sde_traj, sde_traj[t], edges_to_remove, nodes_to_remove, t))
+                    images.append(self.plot_graph(sde_traj, sde_traj[t], edges_to_remove, t))
 
         return graphs, images, self.node_coordinates
 
     def edges_to_remove_prob(self, sde_traj, t, in_state=None):
         pass
 
-    def plot_graph(self, sde_traj, sde_traj_t, edges_to_remove, nodes_in_circle, t):
+    def plot_graph(self, sde_traj, sde_traj_t, edges_to_remove, node_to_ret):
         """
         Method for animating the double/5 well potential graphs.
 
@@ -106,8 +106,6 @@ class GraphSimulation(object):
             Coordinates of current SDE position point.
         edges_to_remove: array
             Edge indices to be removed
-        nodes_in_circle: array
-            Indices of nodes that are in the current circle.
         t: int
             Current time point
 
@@ -121,16 +119,16 @@ class GraphSimulation(object):
         x = self.node_coordinates[:, 0]
         y = self.node_coordinates[:, 1]
 
-        node_df = pd.DataFrame({'x': x, 'y': y, 'node_labels': self.node_labels, 'color_node': [0]*self.n_nodes})
-        node_df.loc[node_df.node_labels.isin(nodes_in_circle), 'color_node'] = 1
+        # node_df = pd.DataFrame({'x': x, 'y': y, 'node_labels': self.node_labels, 'color_node': [0]*self.n_nodes})
+        # node_df.loc[node_df.node_labels.isin(nodes_in_circle), 'color_node'] = 1
 
         x0 = [pair[0] for pair in list(itertools.combinations(x, 2))]
         x1 = [pair[1] for pair in list(itertools.combinations(x, 2))]
         y0 = [pair[0] for pair in list(itertools.combinations(y, 2))]
         y1 = [pair[1] for pair in list(itertools.combinations(y, 2))]
 
-        ax[0].plot((x0, x1), (y0, y1), color='black', lw=0.1, alpha=0.2, zorder=1)
-        sns.scatterplot(x='x', y='y', color='gold', s=400, data=node_df, linewidth=2.5, ax=ax[0], zorder=2)
+        ax[0].plot((x0, x1), (y0, y1), color='black', lw=0.1, alpha=0.8, zorder=1)
+        sns.scatterplot(x, y, color='gold', s=400, linewidth=2.5, ax=ax[0], zorder=2)
 
         self.plot_removed_area(sde_traj_t, sde_traj, ax[0])
 
@@ -138,7 +136,7 @@ class GraphSimulation(object):
         y_to_remove = [(y[i[0]], y[i[1]]) for i in edges_to_remove]
 
         for i in range(len(x_to_remove)):
-            sns.lineplot(x_to_remove[i], y_to_remove[i], color='red', alpha=0.45, ax=ax[0], zorder=1)
+            sns.lineplot(x_to_remove[i], y_to_remove[i], color='red', alpha=0.9, ax=ax[0], zorder=1)
 
         self.plot_trajectory(sde_traj_t, sde_traj, ax[1])
 
@@ -149,7 +147,7 @@ class GraphSimulation(object):
         for a in ax.flat:
             a.label_outer()
 
-        plt.savefig('/home/katerynam/work/data/artificial/prob_50_500_random/{t}.png'.format(t=t),
+        plt.savefig('/home/katerynam/work/data/artificial/test/{t}.png'.format(t=t),
                     bbox_inches='tight')
 
         fig.canvas.draw()
@@ -241,7 +239,7 @@ class LemonGraph(GraphSimulation):
         else:
             return 0
 
-    def edges_to_remove_prob(self, sde_traj, t, in_state=None):
+    def edges_to_remove_prob(self, sde_traj, t, out_state=None):
         """
         Select egdes to be removed randomly.
 
@@ -264,49 +262,43 @@ class LemonGraph(GraphSimulation):
                 Adjacency matrix of the graph at time point t.
         """
         adj_matrix = np.ones((self.n_nodes, self.n_nodes))
+        all_removed_edges = []
 
-        contain_nodes = np.array([self.node_labels[j] for j in range(self.n_nodes)
-                                  if self.if_contain_point(sde_traj[t, 0],
-                                                           sde_traj[t, 1], self.radius,
-                                                           self.node_coordinates[j, 0],
-                                                           self.node_coordinates[j, 1])])
+        contain_nodes_in = [self.node_labels[j] for j in range(self.n_nodes)
+                            if self.if_contain_point(sde_traj[t, 0],
+                                                     sde_traj[t, 1], self.radius,
+                                                     self.node_coordinates[j, 0],
+                                                     self.node_coordinates[j, 1])]
+        edges_to_remove_in = list(itertools.combinations(contain_nodes_in, 2))
 
-        edges_to_remove = list(itertools.combinations(contain_nodes, 2))
-
-        if in_state is None:
-            for edge in edges_to_remove:
+        if out_state is None:
+            for edge in edges_to_remove_in:
                 adj_matrix[edge[0], edge[1]], adj_matrix[edge[1], edge[0]] = 0, 0
 
         else:
-            out_state = 1 - in_state
-
-            binom_flags = np.random.binomial(1, out_state, size=self.n_nodes)
-            pairs_flags_out_state = list(itertools.combinations(binom_flags, 2))
-
-            for ind, edge in enumerate(edges_to_remove):
+            for edge in edges_to_remove_in:
                 adj_matrix[edge[0], edge[1]], adj_matrix[edge[1], edge[0]] = 0, 0
+                all_removed_edges.append(edge)
 
-            other_edges = list(itertools.combinations(self.node_labels, 2))
+            edges_to_remove_out = list(itertools.combinations(self.node_labels, 2))
 
-            for ind, edge in enumerate(other_edges):
-                flag_node_0 = pairs_flags_out_state[ind][0]
-                flag_node_1 = pairs_flags_out_state[ind][1]
+            binomial_flags = np.random.binomial(1, out_state, size=len(self.node_labels))
+            pair_flags = list(itertools.combinations(binomial_flags, 2))
 
-                if flag_node_0 * flag_node_1:
-                    np.append(contain_nodes, edge[0])
-                    np.append(contain_nodes, edge[1])
-                    edges_to_remove.append(edge)
-
+            for ind, edge in enumerate(edges_to_remove_out):
+                if pair_flags[ind][0] * pair_flags[ind][1]:
                     adj_matrix[edge[0], edge[1]], adj_matrix[edge[1], edge[0]] = 0, 0
 
-        return edges_to_remove, contain_nodes, adj_matrix
+                    all_removed_edges.append(edge)
+
+        return all_removed_edges, adj_matrix
 
     def plot_removed_area(self, sde_traj_t, sde_traj, ax):
         ax.add_artist(plt.Circle((sde_traj_t[0], sde_traj_t[1]), radius=self.radius, fill=False, color='black'))
 
     def plot_trajectory(self, sde_traj_t, sde_traj, ax):
-        df = pd.DataFrame({'x': sde_traj[:, 0], 'y': sde_traj[:, 1], 'color': self.graph_states})
+        # df = pd.DataFrame({'x': sde_traj[:, 0], 'y': sde_traj[:, 1], 'color': self.graph_states})
 
-        sns.scatterplot(x='x', y='y', hue='color', s=150, data=df, color='purple')
+        sns.scatterplot(sde_traj[:, 0], sde_traj[:, 1], hue=self.graph_states, s=150, color='purple')
         plt.scatter(sde_traj_t[0], sde_traj_t[1], color='red', s=50)
         ax.add_artist(plt.Circle((sde_traj_t[0], sde_traj_t[1]), radius=self.radius, fill=False, color='black'))

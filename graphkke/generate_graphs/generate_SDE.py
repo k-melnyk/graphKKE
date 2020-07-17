@@ -5,7 +5,7 @@ import numpy as np
 class SDE:
     def __init__(self, c_sigma, n_steps, dim):
         super(SDE, self).__init__()
-        self.h = 0.065
+        self.h = 8e-2 #7e-2 for 5well,
         self.n_steps = n_steps
         self.c_sigma = c_sigma
         self.dim = dim
@@ -32,7 +32,7 @@ class SDE:
 
     def sim_determ_system(self, initial_val):
         """
-        Dimulation of a long trajectory.
+        Simulation of a long trajectory.
 
         Parameters
         ----------
@@ -49,7 +49,7 @@ class SDE:
         y[0, :] = copy.copy(initial_val)
 
         for i in range(1, self.n_steps):
-            dF = self.dF(y[i - 1, :])
+            dF = self.dF(y[i-1, :])
             for d in range(self.dim):
                 y[i, d] = y[i-1, d] + self.h * dF[d] + self.c_sigma[d] * np.sqrt(self.h) * self.dW()
         return y
@@ -89,7 +89,6 @@ class SDE:
 
         Returns
         -------
-
         """
         initial_val = initial_val.transpose()
         return [self.one_traj(initial_val[i, :]) for i in range(dim_traj)]
@@ -166,6 +165,7 @@ class LemonSlice2D(SDE):
         # Potential: V = cos(n * atan2(x(2,:), x(1,:))) + 10 * (sqrt(x(1, :). ^ 2 + x(2,:).^ 2) - 1).^ 2
 
         x = copy.copy(initial_val)
+        print(self.n)
         y_0 = -(self.n * np.sin(self.n * np.arctan2(x[1], x[0])) * x[1] / (x[0] ** 2 + x[1] ** 2) + (
                 20 * (np.sqrt(x[0] ** 2 + x[1] ** 2) - 1)) * x[0] / np.sqrt(x[0] ** 2 + x[1] ** 2))
 
