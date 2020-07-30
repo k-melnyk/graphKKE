@@ -1,4 +1,4 @@
-## GraphKKE: Graph Kernel Koopman Embedding. 
+## graphKKE: graph Kernel Koopman Embedding. 
 
 
 ## Repository Structure
