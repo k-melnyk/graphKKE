@@ -27,7 +27,6 @@
     import graphkke.graph.graph as gl
     
     graphs = []
-    adj_matrix[np.where(adj_matrix != 0)] = 1
     
     for ind, graph in enumerate(adj_matrix):
         graph = gl.Graph(graph)
