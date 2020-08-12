@@ -37,7 +37,6 @@
   Or adjacency lists:
     ```python
     graphs = []
-    adj_matrix[np.where(adj_matrix != 0)] = 1
     
     for ind, graph in enumerate(adj_list):
         graph = gl.Graph(graph, num_nodes)
