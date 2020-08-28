@@ -64,7 +64,7 @@
   ```
 
 ## References
-   [0]  Shervashidze  N.  et  al.  “Weisfeiler-Lehman  GraphKernels.” In: Journal of Machine Learning Research 12 (2011), pp. 2539–2561.
+   [0]  Shervashidze  N.  et  al.  "Weisfeiler-Lehman  GraphKernels". In: Journal of Machine Learning Research 12 (2011), pp. 2539–2561.
    ```
     @article{WL,
       title={Weisfeiler-Lehman Graph Kernels.},
@@ -75,7 +75,7 @@
       pages={2539-2561}
     }
    ```
-   [1] Hsiao  A.  et  al.  “Members  of  the  human  gut  mi-crobiota involved in recovery from Vibrio choleraeinfection”. In:Nature515 (Jan. 2014), pp. 423–426.
+   [1] Hsiao  A.  et  al.  "Members  of  the  human  gut  mi-crobiota involved in recovery from Vibrio choleraeinfection". In:Nature 515 (Jan. 2014), pp. 423–426.
    ```
    @article{CholeraInfOriginal,
     author = {Hsiao A. and Shamsir Ahmed AM. and Subramanian S. and Griffin NW. and Drewry LL. and Petri WA. and Haque R. and Ahmed T. and Gordon JI.},
@@ -88,7 +88,7 @@
     doi = {10.1038/nature13738}
     }
    ```
-   [2]  Caporaso J. et al. “Moving pictures of the humanmicrobiome”.  In:Genome  biology12  (May  2011),R50.
+   [2]  Caporaso J. et al. "Moving pictures of the humanmicrobiome". In: Genome biology 12. May 2011, R50.
    ```
    @article{MovingPicture,
     author = {Caporaso J. and Lauber C. and Costello E. and Berg-Lyons D. and González A. and Stombaugh J. and Knights D and Gajer P. and Ravel J. and Fierer N. and Gordon J. and Knight R.},
@@ -101,4 +101,14 @@
     doi = {10.1186/gb-2011-12-5-r50}
     }
    ```
-
+  [3] Klus S. et al. "A kernel-based approach to molecular conformation analysis". In: Journal of Chemistry Physics 149. 2018.
+  ```
+  @article{KlusMolecularAnalysis,
+  title={A kernel-based approach to molecular conformation analysis},
+  author={Klus S. and Bittracher A. and Schuster I. and Schütte C.},
+  journal={Journal of Chemical Physics},
+  year={2018},
+  volume={149},
+  doi={10.1063/1.5063533}
+}
+```
