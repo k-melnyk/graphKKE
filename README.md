@@ -1,5 +1,7 @@
 ## graphKKE: graph Kernel Koopman Embedding. 
 
+Code for the paper Melnyk K., Klus S., Montavon G., Conrad T. "GraphKKE: Graph Kernel Koopman Embedding for Human Microbiome Analysis", https://arxiv.org/abs/2008.05903. 
+
 
 ## Repository Structure
 * **graphkke/algorithm**: consists of the main function for the grapphKKE method;
