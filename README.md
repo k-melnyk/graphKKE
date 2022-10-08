@@ -20,6 +20,13 @@ Code for the paper Melnyk K., Klus S., Montavon G., Conrad T. "GraphKKE: Graph K
     
     $ python setup.py build
     $ python setup.py install
+    
+    NOTE:
+    In the Anaconda package, in the file "anaconda3\Lib\site-packages\graphkke-0.1.1-py3.8-win-amd64.egg\graphkke\graph\GraphLib_c.py" do the following:
+    #if __package__ or "." in __name__:
+    #from . import _GraphLib_c
+    #else:
+    import _GraphLib_c
     ```
 ## Examples
 * You need first convert your array of adjacency matrices ```adj_matrix``` or adjacency lists ```adj_list``` into graph data type, where ```node_labels``` is a list of node labels for each time-point.
